@@ -1,3 +1,4 @@
+Sg query Test
 /* Formatted on 5/22/2018 11:08:15 AM (QP5 v5.115.810.9015) */
   SELECT   MAX (DISTINCT ASSY$ROLL_SKU),
            (SELECT   'JDW'
