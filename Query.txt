@@ -1,0 +1,34 @@
+/* Formatted on 5/22/2018 11:08:15 AM (QP5 v5.115.810.9015) */
+  SELECT   MAX (DISTINCT ASSY$ROLL_SKU),
+           (SELECT   'JDW'
+              FROM   apps.mtl_system_items_b a
+             WHERE   a.segment1 = ASSY$ROLL_SKU AND organization_id = 1524)
+              JDW_ORG,
+           Assembly_Description,
+           COMP$ROLL_SKU,
+           Component_Description,
+           Component_Item_Type,
+           Component_Total_Quantity,
+           Component_Totaled_Cost,
+           Component_Unit_Cost,
+           Component_Unit_Of_Measure,
+           Assembly_Revision_Date,
+           Assembly_Status,
+           Assembly_Unit_Of_Measure,
+           COUNT ( * ) AS NWQ_AGG_SET_COUNT_SPECIAL_COL
+    FROM   BOM4_Current_Summary
+   WHERE   (   (ASSY$ROLL_SKU LIKE 'P%')
+            OR (ASSY$ROLL_SKU LIKE 'MA%')
+            OR (ASSY$ROLL_SKU LIKE 'MM%'))
+GROUP BY   Assembly_Description,
+           ASSY$ROLL_SKU,
+           COMP$ROLL_SKU,
+           Component_Description,
+           Component_Item_Type,
+           Component_Total_Quantity,
+           Component_Totaled_Cost,
+           Component_Unit_Cost,
+           Component_Unit_Of_Measure,
+           Assembly_Revision_Date,
+           Assembly_Status,
+           Assembly_Unit_Of_Measure
